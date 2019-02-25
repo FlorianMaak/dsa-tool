@@ -1,0 +1,6 @@
+{
+  "test": {
+    "class":  "ConnectionEvents",
+    "method": "test"
+  }
+}

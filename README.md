@@ -25,5 +25,4 @@ pull request. All contributions **must** be released under [GPLv3 licence](https
 ## [Dev] Installation
 After checkout run ```npm install``` and [npm](https://www.npmjs.com/) will install all needed dependencies and creates a new build in ```/dist```-Folder.
 Now you have to rename ```.env.dist``` to ```.env``` and provide all needed config-values.
-Branch 'develop' set up to track remote branch 'develop' from 'origin'. After installation run
-```npm run dev``` to start filewatchers, which are starting a new build after each filechange. 
+After installation run ```npm run dev``` to start filewatchers, which are starting a new build after each filechange. 

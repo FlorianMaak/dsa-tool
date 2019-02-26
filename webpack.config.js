@@ -9,7 +9,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     entry: {
         main: [
-            path.resolve('src/client/js/app.js'),
+            path.resolve('src/client/js/app.mjs'),
             path.resolve('src/client/style/_export.scss')
         ]
     },
@@ -56,6 +56,16 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test: /\.(jpg|png|gif)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'images',
+                        name: '[name].[ext]'
+                    }
+                }
+            }
         ]
     },
     plugins: [

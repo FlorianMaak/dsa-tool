@@ -31,12 +31,10 @@ export default class RequestHandler {
 
         // Set security headers if needed
         if (process.env.SET_SECURITY_HEADERS === 'true') {
-            config = {
-                setHeaders: function (res) {
-                    res.set('X-Frame-Options', 'sameorigin');
-                    res.set('X-XSS-Protection', '1; mode=block');
-                    res.set('X-Content-Type-Options', 'nosniff');
-                }
+            config.setHeaders = function (res) {
+                res.set('X-Frame-Options', 'sameorigin');
+                res.set('X-XSS-Protection', '1; mode=block');
+                res.set('X-Content-Type-Options', 'nosniff');
             };
         }
 

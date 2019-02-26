@@ -19,7 +19,7 @@ export default class Server {
      */
     startup() {
         this.loadModules().then(msg => {
-            const serverConfig = JSON.parse(fs.readFileSync(`${this.serverPath}/config/server.json`));
+            const serverConfig = JSON.parse(fs.readFileSync(`${process.cwd()}/config/server.json`));
 
             console.log(msg);
             this.requestHandler = new RequestHandler(this.events, this.eventClasses, serverConfig);

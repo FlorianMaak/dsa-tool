@@ -11,3 +11,4 @@ export default class ConnectionEvents {
         console.log(socket);
     }
 }
+

@@ -29,12 +29,13 @@ export default class RequestHandler {
         this.express = new Express();
         this.http = http.Server(this.express);
 
-        this.express.get('/', function (req, res) {
-            res.sendFile(`${process.cwd()}/src/client/index.html`);
-        });
+        // Start webserver and serve dist-folder
+        if (this.serverConfig.webserver.enabled) {
+            this.express.use(Express.static('dist'));
+            this.http.listen(this.serverConfig.webserver.port);
 
-        this.http.listen(this.serverConfig.webserver.port);
-        console.log('Webapp running on port: ', this.serverConfig.webserver.port);
+            console.log('Webapp running on port: ', this.serverConfig.webserver.port);
+        }
     }
 
 
@@ -42,17 +43,20 @@ export default class RequestHandler {
      * @description Starts listening for websocket-connections and handles events
      */
     startWebsocketServer() {
-        this.io = new IO(this.http);
+        if (this.serverConfig.websocketserver.enabled) {
+            this.io = new IO(this.http);
 
-        // ToDo: Map events and create listener and initiate usersessionmanagement
+            // Add eventlisteners
+            this.io.on('connection', socket => {
+                for (let event of Object.keys(this.events)) {
+                    socket.on(event, () => {
+                        this.eventClasses[this.events[event].class][this.events[event].method](socket);
+                        console.log(`triggered event ${event}`);
+                    });
+                }
+            });
 
-        this.io.on('connection', socket => {
-            for (let event of Object.keys(this.events)) {
-                socket.on(event, () => {
-                    this.eventClasses[this.events[event].class][this.events[event].method](socket);
-                    console.log(`triggered event ${event}`);
-                });
-            }
-        });
+            console.log('Listening for websocket-connections');
+        }
     }
 }

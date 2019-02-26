@@ -1,0 +1,9 @@
+{
+  "webserver":       {
+    "enabled": true,
+    "port":    "8080"
+  },
+  "websocketserver": {
+    "enabled": true
+  }
+}

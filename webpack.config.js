@@ -1,5 +1,6 @@
-const path = require('path');
+const devMode = process.env.NODE_ENV !== 'production';
 const PACKAGE = require('./package.json');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -22,9 +23,11 @@ module.exports = {
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
-                sourceMap: process.env.NODE_ENV !== 'production'
+                sourceMap: devMode
             }),
-            new OptimizeCSSAssetsPlugin({})
+            new OptimizeCSSAssetsPlugin({
+                cssProcessor: devMode ? null : 'cssnano'
+            })
         ]
     },
     module: {

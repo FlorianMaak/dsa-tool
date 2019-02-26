@@ -6,6 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
+const HtmlBeautifyPlugin = require('html-beautify-webpack-plugin');
+const dotenv = require('dotenv');
+
+// Load environment variables
+dotenv.load();
 
 module.exports = {
     entry: {
@@ -72,19 +78,43 @@ module.exports = {
         ]
     },
     plugins: [
+        // Clear dist folder
         new CleanWebpackPlugin(['dist/*']),
+
+        // Extract and minify css
         new MiniCssExtractPlugin({
             filename: 'style.[hash].css'
         }),
+
+        // Create index.html
         new HtmlWebpackPlugin({
             title: PACKAGE.title,
             meta: {
                 description: PACKAGE.description,
                 keywords: PACKAGE.keywords.join(','),
-                author: PACKAGE.author.name,
+                author: `${PACKAGE.author.name}, ${PACKAGE.author.email}`,
                 viewport: 'width=device-width, initial-scale=1.0'
             },
-            template: path.resolve('src/client/template/index.ejs')
+            template: path.resolve('src/client/template/index.ejs'),
         }),
+
+        // Add CSP and nounce to index.html
+        new CspHtmlWebpackPlugin({
+            'base-uri': '\'self\'',
+            'object-src': '\'none\'',
+            'script-src': ['\'self\'', '\'unsafe-eval\''],
+            'style-src': ['\'self\'']
+        }, {
+            enabled: process.env.SET_SECURITY_HEADERS === 'true',
+        }),
+
+        // Cleanup html
+        new HtmlBeautifyPlugin({
+            config: {
+                html: {
+                    preserve_newlines: false,
+                }
+            },
+        })
     ]
 };

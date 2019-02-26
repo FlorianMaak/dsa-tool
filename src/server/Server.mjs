@@ -1,11 +1,13 @@
 import fs from 'fs';
 import RequestHandler from './RequestHandler.mjs';
+import dotenv from 'dotenv';
 
 /**
  * Handles core functions and server startup
  */
 export default class Server {
     constructor() {
+        dotenv.load();
         this.requestHandler = {};
         this.eventClasses = {};
         this.serverPath = `${process.cwd()}/src/server`;
@@ -19,10 +21,9 @@ export default class Server {
      */
     startup() {
         this.loadModules().then(msg => {
-            const serverConfig = JSON.parse(fs.readFileSync(`${process.cwd()}/config/server.json`));
-
             console.log(msg);
-            this.requestHandler = new RequestHandler(this.events, this.eventClasses, serverConfig);
+
+            this.requestHandler = new RequestHandler(this.events, this.eventClasses);
         });
     }
 

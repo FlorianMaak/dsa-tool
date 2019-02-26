@@ -10,12 +10,10 @@ export default class RequestHandler {
      * @description Handles websocket events and connections.
      * @param {Object} events Holds the event-to-method map.
      * @param {Object} eventClasses Holds EventClasses for each event.
-     * @param {Object} serverConfig Holds the servers config values.
      */
-    constructor(events, eventClasses, serverConfig) {
+    constructor(events, eventClasses) {
         this.events = events;
         this.eventClasses = eventClasses;
-        this.serverConfig = serverConfig;
 
         this.startWebserver();
         this.startWebsocketServer();
@@ -30,12 +28,10 @@ export default class RequestHandler {
         this.http = http.Server(this.express);
 
         // Start webserver and serve dist-folder
-        if (this.serverConfig.webserver.enabled) {
-            this.express.use(Express.static('dist'));
-            this.http.listen(this.serverConfig.webserver.port);
+        this.express.use(Express.static('dist'));
+        this.http.listen(process.env.PORT);
 
-            console.log('Webapp running on port: ', this.serverConfig.webserver.port);
-        }
+        console.log('Webapp running on port: ', process.env.PORT);
     }
 
 
@@ -43,20 +39,18 @@ export default class RequestHandler {
      * @description Starts listening for websocket-connections and handles events
      */
     startWebsocketServer() {
-        if (this.serverConfig.websocketserver.enabled) {
-            this.io = new IO(this.http);
+        this.io = new IO(this.http);
 
-            // Add eventlisteners
-            this.io.on('connection', socket => {
-                for (let event of Object.keys(this.events)) {
-                    socket.on(event, () => {
-                        this.eventClasses[this.events[event].class][this.events[event].method](socket);
-                        console.log(`triggered event ${event}`);
-                    });
-                }
-            });
+        // Add eventlisteners
+        this.io.on('connection', socket => {
+            for (let event of Object.keys(this.events)) {
+                socket.on(event, () => {
+                    this.eventClasses[this.events[event].class][this.events[event].method](socket);
+                    console.log(`triggered event ${event}`);
+                });
+            }
+        });
 
-            console.log('Listening for websocket-connections');
-        }
+        console.log('Listening for websocket-connections');
     }
 }

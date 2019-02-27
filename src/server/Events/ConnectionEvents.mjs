@@ -5,7 +5,6 @@ import Socket from 'socket.io';
  */
 export default class ConnectionEvents {
     constructor() {
-        this.test = 123;
         console.log('ConnectionEvents loaded!');
     }
 
@@ -15,7 +14,15 @@ export default class ConnectionEvents {
      * @param {Socket} socket Holds users websocket-connection.
      */
     test(socket) {
-        console.log(this.test, socket);
+        socket.emit('test', 'Test passed!');
+    }
+
+
+    /**
+     * @description Handles disconnection jobs
+     */
+    disconnect() {
+
     }
 }
 

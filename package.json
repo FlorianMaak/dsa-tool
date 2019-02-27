@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "babel-eslint":                       "^10.0.1",
+    "chai":                               "^4.2.0",
     "clean-webpack-plugin":               "^1.0.1",
     "csp-html-webpack-plugin":            "^3.0.1",
     "css-loader":                         "^2.1.0",
@@ -38,11 +39,13 @@
     "html-beautify-webpack-plugin":       "^1.0.5",
     "html-webpack-plugin":                "^3.2.0",
     "mini-css-extract-plugin":            "^0.5.0",
+    "mocha":                              "^6.0.2",
     "node-sass":                          "^4.11.0",
     "nodemon":                            "^1.18.10",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pre-commit":                         "^1.2.2",
     "sass-loader":                        "^7.1.0",
+    "socket.io-client":                   "^2.2.0",
     "style-loader":                       "^0.23.1",
     "stylelint":                          "^9.10.1",
     "stylelint-config-recommended":       "^2.1.0",
@@ -56,11 +59,12 @@
     "node": ">=11.0.0"
   },
   "scripts":         {
-    "lint":        "eslint **/*.mjs | stylelint **/*.scss",
-    "postinstall": "npm run build",
-    "dev":         "webpack  --config webpack.config.js --watch --mode development",
-    "devserver":   "nodemon -e mjs --watch src/server --experimental-modules start_server.mjs",
-    "build":       "webpack  --config webpack.config.js --mode production"
+    "lint":      "eslint **/*.mjs | stylelint **/*.scss",
+    "test":      "mocha tests/*Test.js --exit",
+    "dev":       "webpack  --config webpack.config.js --watch --mode development",
+    "devserver": "nodemon -e mjs --watch src/server --experimental-modules start_server.mjs",
+    "server":    "node --experimental-modules start_server.mjs",
+    "build":     "webpack  --config webpack.config.js --mode production"
   },
   "pre-commit":      [
     "lint"

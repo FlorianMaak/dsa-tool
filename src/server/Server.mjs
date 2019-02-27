@@ -49,9 +49,9 @@ export default class Server {
         this.getConfig();
 
         for (let eventName of Object.keys(this.events)) {
-            if (!this.eventClasses[eventName.class]) {
-                const className = this.events[eventName].class;
+            const className = this.events[eventName].class;
 
+            if (!this.eventClasses[className]) {
                 if (!this.eventClasses[className]) {
                     const module = await this.importModule(className);
 

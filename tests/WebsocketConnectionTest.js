@@ -1,10 +1,12 @@
 const SIOClient = require('socket.io-client');
+const dotenv = require('dotenv');
 let wsClient = undefined;
 let data = {};
 
 describe('Websocket server tests', function () {
     before(function (done) {
-        wsClient = SIOClient('http://localhost:8080/');
+        dotenv.load();
+        wsClient = SIOClient(`http://localhost:${process.env.PORT}/`);
         done();
     });
 

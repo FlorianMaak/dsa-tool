@@ -3,7 +3,7 @@ import IO from 'socket.io';
 import http from 'http';
 
 /**
- * Handles websocket-connections
+ * @description Handles websocket-connections
  */
 export default class RequestHandler {
     /**
@@ -54,6 +54,8 @@ export default class RequestHandler {
 
         // Add eventlisteners
         this.io.on('connection', socket => {
+            socket.emit('connection', 'ToDo: Transfer data');
+
             for (let event of Object.keys(this.events)) {
                 socket.on(event, () => {
                     this.eventClasses[this.events[event].class][this.events[event].method](socket);

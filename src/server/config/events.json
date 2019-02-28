@@ -1,0 +1,10 @@
+{
+  "test":       {
+    "class":  "ConnectionEvents",
+    "method": "test"
+  },
+  "disconnect": {
+    "class":  "ConnectionEvents",
+    "method": "disconnect"
+  }
+}

@@ -1,7 +1,7 @@
 import Socket from 'socket.io';
 
 /**
- * Handles basic (dis-)connection events
+ * @description Handles basic (dis-)connection events
  */
 export default class ConnectionEvents {
     constructor() {

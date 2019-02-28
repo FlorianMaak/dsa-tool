@@ -3,7 +3,7 @@ import IO from 'socket.io';
 import http from 'http';
 
 /**
- * Handles websocket-connections
+ * @description Handles websocket-connections
  */
 export default class RequestHandler {
     /**

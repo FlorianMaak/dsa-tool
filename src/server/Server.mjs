@@ -3,7 +3,7 @@ import RequestHandler from './RequestHandler.mjs';
 import dotenv from 'dotenv';
 
 /**
- * Handles core functions and server startup
+ * @description Handles core functions and server startup
  */
 export default class Server {
     constructor() {

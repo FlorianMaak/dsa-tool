@@ -35,7 +35,7 @@
     "html-beautify-webpack-plugin":       "^1.0.5",
     "html-webpack-plugin":                "^3.2.0",
     "mini-css-extract-plugin":            "^0.5.0",
-    "clean-webpack-plugin":               "^1.0.1",
+    "clean-webpack-plugin":               "^2.0.0",
     "csp-html-webpack-plugin":            "^3.0.1",
     "css-loader":                         "^2.1.0"
   },
@@ -64,7 +64,7 @@
   "scripts":         {
     "lint":      "eslint **/*.mjs | stylelint **/*.scss",
     "test":      "mocha tests/*Test.js --exit",
-    "doc":       "jsdoc src -c jsdoc.conf.json",
+    "doc":       "jsdoc src -c jsdoc.conf.json -R README.md",
     "dev":       "webpack  --config webpack.config.js --watch --mode development",
     "devserver": "nodemon -e mjs --watch src/server --experimental-modules start_server.mjs",
     "server":    "node --experimental-modules start_server.mjs",

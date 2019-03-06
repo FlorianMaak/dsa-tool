@@ -64,7 +64,7 @@
   "scripts":         {
     "lint":      "eslint **/*.mjs | stylelint **/*.scss",
     "test":      "mocha tests/*Test.js --exit",
-    "doc":       "jsdoc src -c jsdoc.conf.json",
+    "doc":       "jsdoc src -c jsdoc.conf.json -R README.md",
     "dev":       "webpack  --config webpack.config.js --watch --mode development",
     "devserver": "nodemon -e mjs --watch src/server --experimental-modules start_server.mjs",
     "server":    "node --experimental-modules start_server.mjs",

@@ -79,7 +79,7 @@ module.exports = {
     },
     plugins: [
         // Clear dist folder
-        new CleanWebpackPlugin(['dist/*']),
+        new CleanWebpackPlugin(),
 
         // Extract and minify css
         new MiniCssExtractPlugin({

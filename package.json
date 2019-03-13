@@ -21,7 +21,7 @@
     "url":  "git+https://github.com/FlorianMaak/dsa-tool"
   },
   "dependencies":    {
-    "dotenv":                             "^6.2.0",
+    "dotenv":                             "^7.0.0",
     "express":                            "^4.16.4",
     "socket.io":                          "^2.2.0",
     "uglifyjs-webpack-plugin":            "^2.1.2",

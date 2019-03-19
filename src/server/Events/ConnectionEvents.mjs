@@ -12,6 +12,10 @@ export default class ConnectionEvents extends Event {
     }
 
 
+    /**
+     * @description Defines the events repositories.
+     * @returns {string[]} Array of repository classes.
+     */
     getRepositories() {
         return [
             'UserRepository'
@@ -31,9 +35,10 @@ export default class ConnectionEvents extends Event {
     /**
      * @description Just a dummy event to test functionality.
      * @param {Socket} socket Holds users websocket-connection.
+     * @param {Object} data Holds the requests data.
      */
-    async getDummyUserTest(socket) {
-        let testUser = await this.repositories.UserRepository.getById('5c9150123acd552e74430cdf');
+    async getDummyUserTest(socket, data) {
+        let testUser = await this.repositories.UserRepository.getById(data._id);
 
         socket.emit('getDummyUserTest', testUser.username);
     }

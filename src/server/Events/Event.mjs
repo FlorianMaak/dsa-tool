@@ -4,11 +4,20 @@ export default class Event {
     }
 
 
+    /**
+     * @description Add repository to event.
+     * @param {string} repository The repositorys name.
+     */
     addRepository(repository) {
         this.repositories[repository.constructor.name] = repository;
     }
 
 
+    /**
+     * @description Returns repository by name.
+     * @param {string} repositoryName The repositorys name.
+     * @returns {Object} Repository instance.
+     */
     getRepository(repositoryName) {
         return this.repositories[repositoryName];
     }

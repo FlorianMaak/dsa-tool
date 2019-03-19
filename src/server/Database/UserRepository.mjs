@@ -9,6 +9,10 @@ export default class UserRepository extends Repository {
     }
 
 
+    /**
+     * @description Create user object and assign repository.
+     * @returns {User} The users object.
+     */
     createUserObject() {
         let user = new User();
         user.setRepository(this);

@@ -14,7 +14,9 @@ export default class Server {
         this.repositories = {};
         this.serverPath = `${process.cwd()}/src/server`;
 
-        this.startup();
+        this.startup().then(() => {
+            console.log('Server star-up complete!');
+        });
     }
 
 
@@ -34,7 +36,7 @@ export default class Server {
 
     /**
      * @description Connect to MongoDB.
-     * @returns {Promise<MongoDB.connect>} Returns open MongoDB connection.
+     * @returns {MongoDB.connect} Returns open MongoDB connection.
      */
     async establishMongoConnection() {
         return await MongoDB.MongoClient.connect(process.env.MONGO_DB);

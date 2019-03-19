@@ -37,6 +37,6 @@ describe('Websocket server tests', function () {
             }
         });
 
-        wsClient.emit('getDummyUserTest');
+        wsClient.emit('getDummyUserTest', {_id: '5c9150123acd552e74430cdf'});
     });
 });

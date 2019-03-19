@@ -21,12 +21,22 @@ describe('Websocket server tests', function () {
     }));
 
     it('should react on test-event', done => {
-        wsClient.on('test', res => {
-            console.log(res);
-
+        wsClient.on('test', () => {
             done();
         });
 
         wsClient.emit('test');
+    });
+
+    it('should get dummy user', done => {
+        wsClient.on('getDummyUserTest', username => {
+            if (username === 'Test-User') {
+                done();
+            } else {
+                done('Wrong username returned!');
+            }
+        });
+
+        wsClient.emit('getDummyUserTest');
     });
 });

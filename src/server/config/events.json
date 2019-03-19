@@ -1,9 +1,13 @@
 {
-  "test":       {
+  "test":             {
     "class":  "ConnectionEvents",
     "method": "test"
   },
-  "disconnect": {
+  "getDummyUserTest": {
+    "class":  "ConnectionEvents",
+    "method": "getDummyUserTest"
+  },
+  "disconnect":       {
     "class":  "ConnectionEvents",
     "method": "disconnect"
   }

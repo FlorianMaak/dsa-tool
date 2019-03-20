@@ -3,6 +3,14 @@
     "class":  "ConnectionEvents",
     "method": "test"
   },
+  "getUser":    {
+    "class":  "ConnectionEvents",
+    "method": "getUser"
+  },
+  "login":      {
+    "class":  "ConnectionEvents",
+    "method": "loginUser"
+  },
   "disconnect": {
     "class":  "ConnectionEvents",
     "method": "disconnect"

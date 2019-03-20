@@ -9,7 +9,7 @@
   "opts":    {
     "template":    "node_modules/docdash",
     "encoding":    "utf8",
-    "destination": "docs/",
+    "destination": "docs/frontend/",
     "recurse":     true
   },
   "plugins": [

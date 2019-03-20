@@ -40,7 +40,7 @@ export default class ConnectionEvents extends Event {
     async getDummyUserTest(socket, data) {
         let testUser = await this.repositories.UserRepository.getById(data._id);
 
-        socket.emit('getDummyUserTest', testUser.username);
+        socket.emit('getDummyUserTest', testUser ? testUser.username : 'Failed to fetch user!');
     }
 
 

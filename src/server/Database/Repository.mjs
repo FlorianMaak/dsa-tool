@@ -20,6 +20,29 @@ export default class Repository {
 
 
     /**
+     * @description Mapps object to class instance.
+     * @param {Object} newObject Extended instance of MongoObject.
+     * @param {Object} data Contains data to be mapped to instance.
+     * @returns {Object} Returns object or null if no data provided.
+     */
+    mapObject(newObject, data) {
+        let result = null;
+
+        if (data) {
+            for (let key of Object.keys(data)) {
+                if (newObject.hasOwnProperty(key)) {
+                    newObject[key] = data[key];
+                }
+            }
+
+            result = newObject;
+        }
+
+        return result;
+    }
+
+
+    /**
      * @description Deletes object from database.
      * @param {Object} object Object to be deleted.
      */

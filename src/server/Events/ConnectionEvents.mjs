@@ -58,7 +58,7 @@ export default class ConnectionEvents extends Event {
 
         socket.user = user;
 
-        socket.emit('login', user);
+        socket.emit('login', user !== null);
     }
 
 

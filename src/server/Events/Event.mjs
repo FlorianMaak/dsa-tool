@@ -1,3 +1,6 @@
+/**
+ * @desciption Class to be extended to provide basic event functionallity
+ */
 export default class Event {
     constructor() {
         this.repositories = {};

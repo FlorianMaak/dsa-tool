@@ -1,5 +1,8 @@
 import MongoDB from 'mongodb';
 
+/**
+ * @desciption Class to be extended to provide basic repository functionallity.
+ */
 export default class Repository {
     constructor(mongoConnection) {
         this.connection = mongoConnection;

@@ -1,5 +1,6 @@
 import Socket from 'socket.io';
 import Event from './Event';
+import TextHelper from '../Helper/TextHelper';
 
 /**
  * @description Handles basic (dis-)connection events
@@ -37,10 +38,27 @@ export default class ConnectionEvents extends Event {
      * @param {Socket} socket Holds users websocket-connection.
      * @param {Object} data Holds the requests data.
      */
-    async getDummyUserTest(socket, data) {
-        let testUser = await this.repositories.UserRepository.getById(data._id);
+    async getUser(socket, data) {
+        let user = await this.repositories.UserRepository.getUser(data);
 
-        socket.emit('getDummyUserTest', testUser ? testUser.username : 'Failed to fetch user!');
+        socket.emit('getUser', user);
+    }
+
+
+    /**
+     * @description Login user and store userobject to socket.
+     * @param {Socket} socket Holds the users connection.
+     * @param {Object} data UserData provided to login with.
+     */
+    async loginUser(socket, data) {
+        let user = await this.repositories.UserRepository.getUser({
+            username: data.username,
+            password: await TextHelper.hashPassword(data.password)
+        });
+
+        socket.user = user;
+
+        socket.emit('login', user);
     }
 
 

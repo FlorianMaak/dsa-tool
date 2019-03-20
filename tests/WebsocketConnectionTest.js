@@ -27,16 +27,4 @@ describe('Websocket server tests', function () {
 
         wsClient.emit('test');
     });
-
-    it('should get dummy user', done => {
-        wsClient.on('getDummyUserTest', username => {
-            if (username === 'Test-User') {
-                done();
-            } else {
-                done('Wrong username returned!');
-            }
-        });
-
-        wsClient.emit('getDummyUserTest', {_id: '5c9227a625b0421b14bb19b5'});
-    });
 });

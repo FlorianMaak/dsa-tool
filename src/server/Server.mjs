@@ -8,7 +8,7 @@ import MongoDB from 'mongodb';
  */
 export default class Server {
     constructor() {
-        dotenv.load();
+        dotenv.config();
         this.requestHandler = {};
         this.eventClasses = {};
         this.repositories = {};

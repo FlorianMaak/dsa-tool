@@ -4,7 +4,7 @@ let wsClient = undefined;
 
 describe('User Tests', function () {
     before(function (done) {
-        dotenv.load();
+        dotenv.config();
         wsClient = SIOClient(`http://localhost:${process.env.PORT}/`);
         done();
     });

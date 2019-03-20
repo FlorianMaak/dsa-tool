@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
  */
 export default class Server {
     constructor() {
-        dotenv.load();
+        dotenv.config();
         this.requestHandler = {};
         this.eventClasses = {};
         this.serverPath = `${process.cwd()}/src/server`;

@@ -5,7 +5,7 @@ let data = {};
 
 describe('Websocket server tests', function () {
     before(function (done) {
-        dotenv.load();
+        dotenv.config();
         wsClient = SIOClient(`http://localhost:${process.env.PORT}/`);
         done();
     });

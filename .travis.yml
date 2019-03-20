@@ -1,6 +1,8 @@
 language: node_js
 services:
   - mongodb
+env:
+  - MONGO_DB=mongodb://travis:test@127.0.0.1:27017/dsa
 node_js:
   - "11"
 before_install:
@@ -14,6 +16,7 @@ script:
   - npm run doc
 before_script:
   - sleep 15
+  - mongo dsa --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - mongorestore docs/scaffolding/test-data/
 deploy:
   local-dir: docs/frontend

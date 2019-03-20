@@ -21,10 +21,10 @@ describe('Websocket server tests', function () {
     }));
 
     it('should react on test-event', done => {
-        wsClient.on('test', () => {
+        wsClient.on('ping', () => {
             done();
         });
 
-        wsClient.emit('test');
+        wsClient.emit('ping');
     });
 });

@@ -1,14 +1,14 @@
 {
-  "test":       {
+  "ping":       {
     "class":  "ConnectionEvents",
-    "method": "test"
+    "method": "ping"
   },
   "getUser":    {
-    "class":  "ConnectionEvents",
+    "class":  "UserEvents",
     "method": "getUser"
   },
   "login":      {
-    "class":  "ConnectionEvents",
+    "class":  "UserEvents",
     "method": "loginUser"
   },
   "disconnect": {

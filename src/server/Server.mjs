@@ -14,9 +14,7 @@ export default class Server {
         this.repositories = {};
         this.serverPath = `${process.cwd()}/src/server`;
 
-        this.startup().then(() => {
-            console.log('Server star-up complete!');
-        });
+        this.startup();
     }
 
 
@@ -26,12 +24,9 @@ export default class Server {
     async startup() {
         try {
             this.mongoConnection = await this.establishMongoConnection();
+            await this.loadModules();
 
-            this.loadModules().then(msg => {
-                console.log(msg);
-
-                this.requestHandler = new RequestHandler(this.events, this.eventClasses);
-            });
+            this.requestHandler = new RequestHandler(this.events, this.eventClasses);
         } catch (err) {
             console.log(err.toString());
             process.exit();
@@ -65,7 +60,6 @@ export default class Server {
 
     /**
      * @description Loads Eventclasses, based on events.json-file.
-     * @returns {Promise<string>} Success Message.
      */
     async loadModules() {
         this.getConfig();
@@ -84,8 +78,6 @@ export default class Server {
                 }
             }
         }
-
-        return `Loaded ${Object.keys(this.eventClasses).length} modules`;
     }
 
 

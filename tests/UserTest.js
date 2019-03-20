@@ -23,8 +23,8 @@ describe('User Tests', function () {
     });
 
     it('should register a new user', done => {
-        wsClient.on('register', user => {
-            user._id ? done() : done('Registration failed!');
+        wsClient.on('register', state => {
+            state === true ? done() : done(state);
         });
 
         wsClient.emit('register', {username: username, password: '123456'});

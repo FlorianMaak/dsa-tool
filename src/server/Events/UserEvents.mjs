@@ -46,7 +46,12 @@ export default class UserEvents extends Event {
         else {
             let user = await this.repositories.UserRepository.createUser(data.username, data.password);
 
-            socket.emit('register', user ? user : 'username_already_taken');
+            socket.emit('register', user ? true : 'username_already_taken');
+
+            if (user) {
+                socket.user = user;
+                socket.emit('login', user);
+            }
         }
     }
 
@@ -64,7 +69,7 @@ export default class UserEvents extends Event {
 
         socket.user = user;
 
-        socket.emit('login', user !== null);
+        socket.emit('login', user);
     }
 }
 

@@ -6,11 +6,13 @@
 
 ## Requirements
 * nodeJS version >= 11
+* MongoDB >= 4.0.6
 
 ## Installation
 Clone this repository via git or download the provided zip-file.
 After checkout run ```npm install``` and [npm](https://www.npmjs.com/) will install all needed dependencies and creates a new build in ```/dist```-Folder.
 Now you have to rename ```.env.dist``` to ```.env``` and provide all needed config-values.
+Execute ``mongorestore docs/scaffolding/mongo-database/`` to import structure into mongoDB.
 After that's done, run ```npm run build``` to build the project on base of the env values given.
 If finished run the start.sh file and the server starts serving the page on the provided port.
 

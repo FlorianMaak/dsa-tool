@@ -1,6 +1,7 @@
 import fs from 'fs';
 import RequestHandler from './RequestHandler.mjs';
 import dotenv from 'dotenv';
+import MongoDB from 'mongodb';
 
 /**
  * @description Handles core functions and server startup
@@ -10,21 +11,35 @@ export default class Server {
         dotenv.config();
         this.requestHandler = {};
         this.eventClasses = {};
+        this.repositories = {};
         this.serverPath = `${process.cwd()}/src/server`;
 
-        this.startup();
+        this.startup().then(() => {
+            console.log('Server star-up complete!');
+        });
     }
 
 
     /**
      * @description Starts the server
      */
-    startup() {
+    async startup() {
+        this.mongoConnection = await this.establishMongoConnection();
+
         this.loadModules().then(msg => {
             console.log(msg);
 
             this.requestHandler = new RequestHandler(this.events, this.eventClasses);
         });
+    }
+
+
+    /**
+     * @description Connect to MongoDB.
+     * @returns {MongoDB.connect} Returns open MongoDB connection.
+     */
+    async establishMongoConnection() {
+        return await MongoDB.MongoClient.connect(process.env.MONGO_DB);
     }
 
 
@@ -52,10 +67,13 @@ export default class Server {
             const className = this.events[eventName].class;
 
             if (!this.eventClasses[className]) {
-                if (!this.eventClasses[className]) {
-                    const module = await this.importModule(className);
+                const module = await this.importModule(className);
+                this.eventClasses[className] = new module.default();
 
-                    this.eventClasses[className] = new module.default();
+                for (let repository of this.eventClasses[className].getRepositories()) {
+                    if (!this.eventClasses[className].repositories[repository]) {
+                        this.eventClasses[className].addRepository(await this.getRepository(repository));
+                    }
                 }
             }
         }
@@ -65,11 +83,28 @@ export default class Server {
 
 
     /**
+     * @description Loads repositories and stores them in memory.
+     * @param {string} repositoryName Represents the repositorys className.
+     * @returns {Promise<*>} Returns Promise containing repository.
+     */
+    async getRepository(repositoryName) {
+        if (!this.repositories[repositoryName]) {
+            await this.importModule(repositoryName, 'Database').then(repository => {
+                this.repositories[repositoryName] = new repository.default(this.mongoConnection);
+            });
+        }
+
+        return this.repositories[repositoryName];
+    }
+
+
+    /**
      * @description Import EventClass-Module, based on it's name.
      * @param {string} className The EventClass to be loaded from Events-Folder.
+     * @param {string} path Path to class file.
      * @returns {Promise<*>} Returns promise, if import finished.
      */
-    async importModule(className) {
-        return await import(`file://${this.serverPath}/Events/${className}.mjs`);
+    async importModule(className, path = 'Events') {
+        return await import(`file://${this.serverPath}/${path}/${className}.mjs`);
     }
 }

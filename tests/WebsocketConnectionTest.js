@@ -21,9 +21,7 @@ describe('Websocket server tests', function () {
     }));
 
     it('should react on test-event', done => {
-        wsClient.on('test', res => {
-            console.log(res);
-
+        wsClient.on('test', () => {
             done();
         });
 

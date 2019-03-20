@@ -82,7 +82,6 @@
     "scanjs-rules/call_addEventListener":                 1,
     "scanjs-rules/call_addEventListener_deviceproximity": 1,
     "scanjs-rules/call_addEventListener_message":         1,
-    "scanjs-rules/call_connect":                          1,
     "scanjs-rules/call_eval":                             1,
     "scanjs-rules/call_execScript":                       1,
     "scanjs-rules/call_hide":                             1,

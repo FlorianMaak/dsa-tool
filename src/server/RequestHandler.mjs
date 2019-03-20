@@ -57,8 +57,8 @@ export default class RequestHandler {
             socket.emit('connection', 'ToDo: Transfer data');
 
             for (let event of Object.keys(this.events)) {
-                socket.on(event, () => {
-                    this.eventClasses[this.events[event].class][this.events[event].method](socket);
+                socket.on(event, data => {
+                    this.eventClasses[this.events[event].class][this.events[event].method](socket, data);
                     console.log(`triggered event ${event}`);
                 });
             }

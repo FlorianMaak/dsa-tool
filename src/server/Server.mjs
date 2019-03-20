@@ -39,7 +39,9 @@ export default class Server {
      * @returns {MongoDB.connect} Returns open MongoDB connection.
      */
     async establishMongoConnection() {
-        return await MongoDB.MongoClient.connect(process.env.MONGO_DB);
+        return await MongoDB.MongoClient.connect(process.env.MONGO_DB, {
+            useNewUrlParser: true
+        });
     }
 
 

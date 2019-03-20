@@ -17,6 +17,15 @@ export default class Event {
 
 
     /**
+     * @description Defines the events repositories.
+     * @returns {Array<string>} List of repositories.
+     */
+    getRepositories() {
+        return [];
+    }
+
+
+    /**
      * @description Returns repository by name.
      * @param {string} repositoryName The repositorys name.
      * @returns {Object} Repository instance.

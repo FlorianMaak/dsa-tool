@@ -54,16 +54,15 @@ export default class RequestHandler {
 
         // Add eventlisteners
         this.io.on('connection', socket => {
-            socket.emit('connection', 'ToDo: Transfer data');
+            socket.emit('connection');
 
             for (let event of Object.keys(this.events)) {
                 socket.on(event, data => {
                     this.eventClasses[this.events[event].class][this.events[event].method](socket, data);
-                    console.log(`triggered event ${event}`);
                 });
             }
         });
 
-        console.log('Listening for websocket-connections');
+        console.log('Started websocket server');
     }
 }

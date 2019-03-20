@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Model/User.mjs - Documentation</title>
+    <title>Events/Event.mjs - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,7 +31,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Model/User.mjs</h1>
+    <h1 class="page-title">Events/Event.mjs</h1>
     
 
     
@@ -41,16 +41,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import MongoObject from '../Database/MongoObject';
-
-/**
- * @desciption Represents a user.
+            <pre class="prettyprint source linenums"><code>/**
+ * @desciption Class to be extended to provide basic event functionallity
  */
-export default class User extends MongoObject {
+export default class Event {
     constructor() {
-        super();
+        this.repositories = {};
+    }
 
-        this.username = '';
+
+    /**
+     * @description Add repository to event.
+     * @param {string} repository The repositorys name.
+     */
+    addRepository(repository) {
+        this.repositories[repository.constructor.name] = repository;
+    }
+
+
+    /**
+     * @description Returns repository by name.
+     * @param {string} repositoryName The repositorys name.
+     * @returns {Object} Repository instance.
+     */
+    getRepository(repositoryName) {
+        return this.repositories[repositoryName];
     }
 }
 </code></pre>

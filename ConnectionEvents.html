@@ -26,7 +26,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ConnectionEvents.html">ConnectionEvents</a><ul class='methods'><li data-type='method'><a href="ConnectionEvents.html#disconnect">disconnect</a></li><li data-type='method'><a href="ConnectionEvents.html#test">test</a></li></ul></li><li><a href="RequestHandler.html">RequestHandler</a><ul class='methods'><li data-type='method'><a href="RequestHandler.html#startWebserver">startWebserver</a></li><li data-type='method'><a href="RequestHandler.html#startWebsocketServer">startWebsocketServer</a></li></ul></li><li><a href="Server.html">Server</a><ul class='methods'><li data-type='method'><a href="Server.html#getConfig">getConfig</a></li><li data-type='method'><a href="Server.html#importModule">importModule</a></li><li data-type='method'><a href="Server.html#loadModules">loadModules</a></li><li data-type='method'><a href="Server.html#startup">startup</a></li></ul></li><li><a href="User.html">User</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ConnectionEvents.html">ConnectionEvents</a><ul class='methods'><li data-type='method'><a href="ConnectionEvents.html#disconnect">disconnect</a></li><li data-type='method'><a href="ConnectionEvents.html#getRepositories">getRepositories</a></li><li data-type='method'><a href="ConnectionEvents.html#getUser">getUser</a></li><li data-type='method'><a href="ConnectionEvents.html#loginUser">loginUser</a></li><li data-type='method'><a href="ConnectionEvents.html#test">test</a></li></ul></li><li><a href="Event.html">Event</a><ul class='methods'><li data-type='method'><a href="Event.html#addRepository">addRepository</a></li><li data-type='method'><a href="Event.html#getRepository">getRepository</a></li></ul></li><li><a href="MongoObject.html">MongoObject</a><ul class='methods'><li data-type='method'><a href="MongoObject.html#getId">getId</a></li></ul></li><li><a href="Repository.html">Repository</a><ul class='methods'><li data-type='method'><a href="Repository.html#delete">delete</a></li><li data-type='method'><a href="Repository.html#getById">getById</a></li><li data-type='method'><a href="Repository.html#getCollectionObject">getCollectionObject</a></li><li data-type='method'><a href="Repository.html#mapObject">mapObject</a></li><li data-type='method'><a href="Repository.html#save">save</a></li></ul></li><li><a href="RequestHandler.html">RequestHandler</a><ul class='methods'><li data-type='method'><a href="RequestHandler.html#startWebserver">startWebserver</a></li><li data-type='method'><a href="RequestHandler.html#startWebsocketServer">startWebsocketServer</a></li></ul></li><li><a href="Server.html">Server</a><ul class='methods'><li data-type='method'><a href="Server.html#establishMongoConnection">establishMongoConnection</a></li><li data-type='method'><a href="Server.html#getConfig">getConfig</a></li><li data-type='method'><a href="Server.html#getRepository">getRepository</a></li><li data-type='method'><a href="Server.html#importModule">importModule</a></li><li data-type='method'><a href="Server.html#loadModules">loadModules</a></li><li data-type='method'><a href="Server.html#startup">startup</a></li></ul></li><li><a href="TextHelper.html">TextHelper</a><ul class='methods'><li data-type='method'><a href="TextHelper.html#.hashPassword">hashPassword</a></li></ul></li><li><a href="User.html">User</a></li><li><a href="UserRepository.html">UserRepository</a><ul class='methods'><li data-type='method'><a href="UserRepository.html#getUser">getUser</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -178,7 +178,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line26">line 26</a>
+        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -253,6 +253,433 @@
 
     
 
+    <h4 class="name" id="getRepositories"><span class="type-signature"></span>getRepositories<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Defines the events repositories.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array of repository classes.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getUser"><span class="type-signature">(async) </span>getUser<span class="signature">(socket, data)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line41">line 41</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Just a dummy event to test functionality.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Socket</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Holds users websocket-connection.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Holds the requests data.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loginUser"><span class="type-signature">(async) </span>loginUser<span class="signature">(socket, data)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Login user and store userobject to socket.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Socket</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Holds the users connection.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">UserData provided to login with.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="test"><span class="type-signature"></span>test<span class="signature">(socket)</span><span class="type-signature"></span></h4>
 
     
@@ -265,7 +692,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line18">line 18</a>
+        <a href="Events_ConnectionEvents.mjs.html">Events/ConnectionEvents.mjs</a>, <a href="Events_ConnectionEvents.mjs.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -404,7 +831,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 06 2019 19:30:36 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 20 2019 15:41:16 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

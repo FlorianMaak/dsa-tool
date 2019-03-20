@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Model/User.mjs - Documentation</title>
+    <title>Database/Repository.mjs - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,7 +31,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Model/User.mjs</h1>
+    <h1 class="page-title">Database/Repository.mjs</h1>
     
 
     
@@ -41,16 +41,79 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import MongoObject from '../Database/MongoObject';
+            <pre class="prettyprint source linenums"><code>import MongoDB from 'mongodb';
 
 /**
- * @desciption Represents a user.
+ * @desciption Class to be extended to provide basic repository functionallity.
  */
-export default class User extends MongoObject {
-    constructor() {
-        super();
+export default class Repository {
+    constructor(mongoConnection) {
+        this.connection = mongoConnection;
+        this.collection = null;
+        this.collectionObject = null;
+    }
 
-        this.username = '';
+
+    /**
+     * @description Stores object to database.
+     */
+    save() {
+        console.log(`Missing implementation! collection: ${this.collection}`);
+    }
+
+
+    /**
+     * @description Mapps object to class instance.
+     * @param {Object} newObject Extended instance of MongoObject.
+     * @param {Object} data Contains data to be mapped to instance.
+     * @returns {Object} Returns object or null if no data provided.
+     */
+    mapObject(newObject, data) {
+        let result = null;
+
+        if (data) {
+            for (let key of Object.keys(data)) {
+                if (newObject.hasOwnProperty(key)) {
+                    newObject[key] = data[key];
+                }
+            }
+
+            result = newObject;
+        }
+
+        return result;
+    }
+
+
+    /**
+     * @description Deletes object from database.
+     * @param {Object} object Object to be deleted.
+     */
+    delete(object) {
+        this.getCollectionObject().deleteOne({_id: new MongoDB.ObjectID(object._id)});
+    }
+
+
+    /**
+     * @description Returns object by mongoID
+     * @param {string} mongoID The objects mongoID.
+     * @returns {Promise} Returns object.
+     */
+    async getById(mongoID) {
+        return await this.getCollectionObject().findOne({_id: MongoDB.ObjectID(mongoID)});
+    }
+
+
+    /**
+     * @description Returns instance of collection.
+     * @returns {Object} The collections instance.
+     */
+    getCollectionObject() {
+        if (!this.collectionObject) {
+            this.collectionObject = this.connection.db().collection(this.collection);
+        }
+
+        return this.collectionObject;
     }
 }
 </code></pre>

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Model/User.mjs - Documentation</title>
+    <title>Helper/TextHelper.mjs - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,7 +31,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Model/User.mjs</h1>
+    <h1 class="page-title">Helper/TextHelper.mjs</h1>
     
 
     
@@ -41,16 +41,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import MongoObject from '../Database/MongoObject';
+            <pre class="prettyprint source linenums"><code>import crypto from 'crypto';
 
 /**
- * @desciption Represents a user.
+ * @description Profides static helper methods
  */
-export default class User extends MongoObject {
-    constructor() {
-        super();
-
-        this.username = '';
+export default class TextHelper {
+    /**
+     * @description Generates password hash, based on input and APP_SECRET
+     * @param {string} password Password to be hashed.
+     * @returns {Promise&lt;any>} Promise containing hashed password.
+     */
+    static hashPassword(password) {
+        return new Promise(resolve => {
+            crypto.pbkdf2(password, process.env.APP_SECRET, 100000, 32, 'sha512',
+                (err, derivedKey) => {
+                    resolve(derivedKey.toString('hex'));
+                }
+            );
+        });
     }
 }
 </code></pre>

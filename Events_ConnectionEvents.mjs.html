@@ -26,7 +26,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ConnectionEvents.html">ConnectionEvents</a><ul class='methods'><li data-type='method'><a href="ConnectionEvents.html#disconnect">disconnect</a></li><li data-type='method'><a href="ConnectionEvents.html#test">test</a></li></ul></li><li><a href="RequestHandler.html">RequestHandler</a><ul class='methods'><li data-type='method'><a href="RequestHandler.html#startWebserver">startWebserver</a></li><li data-type='method'><a href="RequestHandler.html#startWebsocketServer">startWebsocketServer</a></li></ul></li><li><a href="Server.html">Server</a><ul class='methods'><li data-type='method'><a href="Server.html#getConfig">getConfig</a></li><li data-type='method'><a href="Server.html#importModule">importModule</a></li><li data-type='method'><a href="Server.html#loadModules">loadModules</a></li><li data-type='method'><a href="Server.html#startup">startup</a></li></ul></li><li><a href="User.html">User</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ConnectionEvents.html">ConnectionEvents</a><ul class='methods'><li data-type='method'><a href="ConnectionEvents.html#disconnect">disconnect</a></li><li data-type='method'><a href="ConnectionEvents.html#getRepositories">getRepositories</a></li><li data-type='method'><a href="ConnectionEvents.html#getUser">getUser</a></li><li data-type='method'><a href="ConnectionEvents.html#loginUser">loginUser</a></li><li data-type='method'><a href="ConnectionEvents.html#test">test</a></li></ul></li><li><a href="Event.html">Event</a><ul class='methods'><li data-type='method'><a href="Event.html#addRepository">addRepository</a></li><li data-type='method'><a href="Event.html#getRepository">getRepository</a></li></ul></li><li><a href="MongoObject.html">MongoObject</a><ul class='methods'><li data-type='method'><a href="MongoObject.html#getId">getId</a></li></ul></li><li><a href="Repository.html">Repository</a><ul class='methods'><li data-type='method'><a href="Repository.html#delete">delete</a></li><li data-type='method'><a href="Repository.html#getById">getById</a></li><li data-type='method'><a href="Repository.html#getCollectionObject">getCollectionObject</a></li><li data-type='method'><a href="Repository.html#mapObject">mapObject</a></li><li data-type='method'><a href="Repository.html#save">save</a></li></ul></li><li><a href="RequestHandler.html">RequestHandler</a><ul class='methods'><li data-type='method'><a href="RequestHandler.html#startWebserver">startWebserver</a></li><li data-type='method'><a href="RequestHandler.html#startWebsocketServer">startWebsocketServer</a></li></ul></li><li><a href="Server.html">Server</a><ul class='methods'><li data-type='method'><a href="Server.html#establishMongoConnection">establishMongoConnection</a></li><li data-type='method'><a href="Server.html#getConfig">getConfig</a></li><li data-type='method'><a href="Server.html#getRepository">getRepository</a></li><li data-type='method'><a href="Server.html#importModule">importModule</a></li><li data-type='method'><a href="Server.html#loadModules">loadModules</a></li><li data-type='method'><a href="Server.html#startup">startup</a></li></ul></li><li><a href="TextHelper.html">TextHelper</a><ul class='methods'><li data-type='method'><a href="TextHelper.html#.hashPassword">hashPassword</a></li></ul></li><li><a href="User.html">User</a></li><li><a href="UserRepository.html">UserRepository</a><ul class='methods'><li data-type='method'><a href="UserRepository.html#getUser">getUser</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -42,13 +42,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import Socket from 'socket.io';
+import Event from './Event';
+import TextHelper from '../Helper/TextHelper';
 
 /**
  * @description Handles basic (dis-)connection events
  */
-export default class ConnectionEvents {
+export default class ConnectionEvents extends Event {
     constructor() {
+        super();
+
         console.log('ConnectionEvents loaded!');
+    }
+
+
+    /**
+     * @description Defines the events repositories.
+     * @returns {string[]} Array of repository classes.
+     */
+    getRepositories() {
+        return [
+            'UserRepository'
+        ];
     }
 
 
@@ -58,6 +73,35 @@ export default class ConnectionEvents {
      */
     test(socket) {
         socket.emit('test', 'Test passed!');
+    }
+
+
+    /**
+     * @description Just a dummy event to test functionality.
+     * @param {Socket} socket Holds users websocket-connection.
+     * @param {Object} data Holds the requests data.
+     */
+    async getUser(socket, data) {
+        let user = await this.repositories.UserRepository.getUser(data);
+
+        socket.emit('getUser', user);
+    }
+
+
+    /**
+     * @description Login user and store userobject to socket.
+     * @param {Socket} socket Holds the users connection.
+     * @param {Object} data UserData provided to login with.
+     */
+    async loginUser(socket, data) {
+        let user = await this.repositories.UserRepository.getUser({
+            username: data.username,
+            password: await TextHelper.hashPassword(data.password)
+        });
+
+        socket.user = user;
+
+        socket.emit('login', user !== null);
     }
 
 
@@ -83,7 +127,7 @@ export default class ConnectionEvents {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 06 2019 19:30:36 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 20 2019 15:41:16 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -32,10 +32,17 @@ describe('User Tests', function () {
 
     it('should get user by name', done => {
         wsClient.on('getUser', user => {
-            console.log(user);
             user ? done() : done('No user returned!');
         });
 
         wsClient.emit('getUser', {username: 'Test-User'});
+    });
+
+    it('should logout user', done => {
+        wsClient.on('logout', () => {
+            done();
+        });
+
+        wsClient.emit('logout');
     });
 });

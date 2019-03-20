@@ -18,6 +18,10 @@
     "method":         "register",
     "login_required": false
   },
+  "logout":     {
+    "class":  "UserEvents",
+    "method": "logout"
+  },
   "disconnect": {
     "class":          "ConnectionEvents",
     "method":         "disconnect",

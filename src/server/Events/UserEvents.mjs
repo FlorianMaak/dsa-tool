@@ -57,6 +57,17 @@ export default class UserEvents extends Event {
 
 
     /**
+     * @description Deletes user object from socket and emits logout-event.
+     * @param {Socket} socket The users connection.
+     */
+    logout(socket) {
+        delete socket.user;
+
+        socket.emit('logout');
+    }
+
+
+    /**
      * @description Login user and store userobject to socket.
      * @param {Socket} socket Holds the users connection.
      * @param {Object} data UserData provided to login with.

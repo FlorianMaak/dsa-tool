@@ -24,13 +24,18 @@ export default class Server {
      * @description Starts the server
      */
     async startup() {
-        this.mongoConnection = await this.establishMongoConnection();
+        try {
+            this.mongoConnection = await this.establishMongoConnection();
 
-        this.loadModules().then(msg => {
-            console.log(msg);
+            this.loadModules().then(msg => {
+                console.log(msg);
 
-            this.requestHandler = new RequestHandler(this.events, this.eventClasses);
-        });
+                this.requestHandler = new RequestHandler(this.events, this.eventClasses);
+            });
+        } catch (err) {
+            console.log(err.toString());
+            process.exit();
+        }
     }
 
 

@@ -35,7 +35,7 @@ describe('User Tests', function () {
             user ? done() : done('No user returned!');
         });
 
-        wsClient.emit('getUser', {username: 'Test-User'});
+        wsClient.emit('getUser', {username: username});
     });
 
     it('should logout user', done => {

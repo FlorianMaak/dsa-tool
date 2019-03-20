@@ -31,7 +31,8 @@ export default class UserRepository extends Repository {
         if (!user) {
             let newUser = await this.getCollectionObject().insertOne({
                 username: username,
-                password: await TextHelper.hashPassword(password)
+                password: await TextHelper.hashPassword(password),
+                created: Date.now()
             });
 
             return this.mapObject(new User(), newUser.ops[0]);

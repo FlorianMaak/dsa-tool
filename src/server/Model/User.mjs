@@ -8,5 +8,6 @@ export default class User extends MongoObject {
         super();
 
         this.username = '';
+        this.created = null;
     }
 }

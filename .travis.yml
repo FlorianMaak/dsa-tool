@@ -17,7 +17,7 @@ script:
 before_script:
   - sleep 15
   - mongo dsa --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - mongorestore docs/scaffolding/test-data/
+  - mongorestore docs/scaffolding/mongo-database/
 deploy:
   local-dir: docs/frontend
   provider: pages

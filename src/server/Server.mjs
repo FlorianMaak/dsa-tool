@@ -70,10 +70,11 @@ export default class Server {
             if (!this.eventClasses[className]) {
                 const module = await this.importModule(className);
                 this.eventClasses[className] = new module.default();
+                let eventClass = this.eventClasses[className];
 
-                for (let repository of this.eventClasses[className].getRepositories()) {
-                    if (!this.eventClasses[className].repositories[repository]) {
-                        this.eventClasses[className].addRepository(await this.getRepository(repository));
+                for (let repository of eventClass.getRepositories()) {
+                    if (!eventClass.repositories[repository]) {
+                        eventClass.addRepository(await this.getRepository(repository));
                     }
                 }
             }

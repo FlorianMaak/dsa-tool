@@ -1,6 +1,7 @@
 const SIOClient = require('socket.io-client');
 const dotenv = require('dotenv');
 let wsClient = undefined;
+let username = 'Test-User-' + Date.now();
 
 describe('User Tests', function () {
     before(function (done) {
@@ -21,11 +22,19 @@ describe('User Tests', function () {
         wsClient.emit('getUser', {username: 'Test-User'});
     });
 
-    it('should pass login', done => {
+    it('should register a new user', done => {
+        wsClient.on('register', user => {
+            user._id ? done() : done('Registration failed!');
+        });
+
+        wsClient.emit('register', {username: username, password: '123456'});
+    });
+
+    it('should login as new user', done => {
         wsClient.on('login', user => {
             user ? done() : done('Login failed!');
         });
 
-        wsClient.emit('login', {username: 'Test-User', password: '123456'});
+        wsClient.emit('login', {username: username, password: '123456'});
     });
 });

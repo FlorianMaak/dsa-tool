@@ -1,5 +1,6 @@
 import User from '../Model/User';
 import Repository from './Repository';
+import TextHelper from '../Helper/TextHelper';
 
 /**
  * @description Provides database access for user objects
@@ -21,5 +22,21 @@ export default class UserRepository extends Repository {
         let data = await this.getCollectionObject().findOne(userData);
 
         return this.mapObject(new User(), data);
+    }
+
+
+    async createUser(username, password) {
+        let user = await this.getUser({username: username});
+
+        if (!user) {
+            let newUser = await this.getCollectionObject().insertOne({
+                username: username,
+                password: await TextHelper.hashPassword(password)
+            });
+
+            return this.mapObject(new User(), newUser.ops[0]);
+        }
+
+        return false;
     }
 }

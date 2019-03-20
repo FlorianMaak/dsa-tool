@@ -11,6 +11,10 @@
     "class":  "UserEvents",
     "method": "loginUser"
   },
+  "register":   {
+    "class":  "UserEvents",
+    "method": "register"
+  },
   "disconnect": {
     "class":  "ConnectionEvents",
     "method": "disconnect"

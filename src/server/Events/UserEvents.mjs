@@ -35,6 +35,23 @@ export default class UserEvents extends Event {
 
 
     /**
+     * @description Just a dummy event to test functionality.
+     * @param {Socket} socket Holds users websocket-connection.
+     * @param {Object} data Holds the requests data.
+     */
+    async register(socket, data) {
+        if (!data.username || !data.password) {
+            socket.emit('register', 'data_missing');
+        }
+        else {
+            let user = await this.repositories.UserRepository.createUser(data.username, data.password);
+
+            socket.emit('register', user ? user : 'username_already_taken');
+        }
+    }
+
+
+    /**
      * @description Login user and store userobject to socket.
      * @param {Socket} socket Holds the users connection.
      * @param {Object} data UserData provided to login with.

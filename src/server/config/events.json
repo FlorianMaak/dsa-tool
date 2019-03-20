@@ -1,22 +1,26 @@
 {
   "ping":       {
-    "class":  "ConnectionEvents",
-    "method": "ping"
+    "class":          "ConnectionEvents",
+    "method":         "ping",
+    "login_required": false
   },
   "getUser":    {
     "class":  "UserEvents",
     "method": "getUser"
   },
   "login":      {
-    "class":  "UserEvents",
-    "method": "loginUser"
+    "class":          "UserEvents",
+    "method":         "loginUser",
+    "login_required": false
   },
   "register":   {
-    "class":  "UserEvents",
-    "method": "register"
+    "class":          "UserEvents",
+    "method":         "register",
+    "login_required": false
   },
   "disconnect": {
-    "class":  "ConnectionEvents",
-    "method": "disconnect"
+    "class":          "ConnectionEvents",
+    "method":         "disconnect",
+    "login_required": false
   }
 }

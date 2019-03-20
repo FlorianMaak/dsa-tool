@@ -58,7 +58,14 @@ export default class RequestHandler {
 
             for (let event of Object.keys(this.events)) {
                 socket.on(event, data => {
-                    this.eventClasses[this.events[event].class][this.events[event].method](socket, data);
+                    let loginNeeded = this.events[event]['login_required'] !== false;
+
+                    if (!loginNeeded || (loginNeeded && socket.user !== undefined)) {
+                        this.eventClasses[this.events[event].class][this.events[event].method](socket, data);
+                    }
+                    else {
+                        socket.disconnect();
+                    }
                 });
             }
         });

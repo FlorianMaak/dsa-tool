@@ -14,14 +14,6 @@ describe('User Tests', function () {
         done();
     });
 
-    it('should get user by name', done => {
-        wsClient.on('getUser', user => {
-            user ? done() : done('No user returned!');
-        });
-
-        wsClient.emit('getUser', {username: 'Test-User'});
-    });
-
     it('should register a new user', done => {
         wsClient.on('register', state => {
             state === true ? done() : done(state);
@@ -36,5 +28,13 @@ describe('User Tests', function () {
         });
 
         wsClient.emit('login', {username: username, password: '123456'});
+    });
+
+    it('should get user by name', done => {
+        wsClient.on('getUser', user => {
+            user ? done() : done('No user returned!');
+        });
+
+        wsClient.emit('getUser', {username: 'Test-User'});
     });
 });

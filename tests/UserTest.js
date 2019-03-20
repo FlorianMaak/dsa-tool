@@ -24,7 +24,7 @@ describe('User Tests', function () {
 
     it('should login as new user', done => {
         wsClient.on('login', user => {
-            user ? done() : done('Login failed!');
+            user._id ? done() : done('Login failed!');
         });
 
         wsClient.emit('login', {username: username, password: '123456'});

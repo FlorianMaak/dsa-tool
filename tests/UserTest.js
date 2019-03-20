@@ -32,6 +32,7 @@ describe('User Tests', function () {
 
     it('should get user by name', done => {
         wsClient.on('getUser', user => {
+            console.log(user);
             user ? done() : done('No user returned!');
         });
 

@@ -13,9 +13,10 @@ export default class Repository {
 
     /**
      * @description Stores object to database.
+     * @param {Object} object Represents MongoObject instance.
      */
-    save() {
-        console.log(`Missing implementation! collection: ${this.collection}`);
+    update(object) {
+        this.getCollectionObject().updateOne({_id: object._id}, object);
     }
 
 
@@ -35,6 +36,8 @@ export default class Repository {
                 }
             }
 
+            newObject.delete = () => this.delete(newObject);
+            newObject.update = () => this.update(newObject);
             result = newObject;
         }
 

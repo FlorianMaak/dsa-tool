@@ -28,4 +28,18 @@ export default class MongoObject {
 
         return copy;
     }
+
+
+    /**
+     * @description Delete function, replaced by Repository.
+     */
+    delete() {
+    }
+
+
+    /**
+     * @description Update function, replaced by Repository.
+     */
+    update() {
+    }
 }

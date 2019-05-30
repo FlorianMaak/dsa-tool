@@ -21,7 +21,7 @@
     "url":  "git+https://github.com/FlorianMaak/dsa-tool"
   },
   "dependencies":    {
-    "clean-webpack-plugin":               "^2.0.1",
+    "clean-webpack-plugin":               "^3.0.0",
     "csp-html-webpack-plugin":            "^3.0.1",
     "css-loader":                         "^2.1.1",
     "dotenv":                             "^7.0.0",

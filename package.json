@@ -38,7 +38,7 @@
     "uglifyjs-webpack-plugin":            "^2.1.2",
     "webmanifest-loader":                 "^0.3.0",
     "webpack":                            "^4.29.6",
-    "webpack-cli":                        "^3.3.0"
+    "webpack-cli":                        "^3.3.7"
   },
   "devDependencies": {
     "babel-eslint":                      "^10.0.1",

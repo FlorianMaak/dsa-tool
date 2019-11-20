@@ -52,7 +52,7 @@
     "jsdoc-export-default-interop":      "^0.3.1",
     "mocha":                             "^6.0.2",
     "node-sass":                         "^4.11.0",
-    "nodemon":                           "^1.18.10",
+    "nodemon":                           "^2.0.0",
     "pre-commit":                        "^1.2.2",
     "socket.io-client":                  "^2.2.0",
     "stylelint":                         "^9.10.1",

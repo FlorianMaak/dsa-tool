@@ -50,7 +50,7 @@
     "eslint-plugin-scanjs-rules":        "^0.2.1",
     "jsdoc":                             "^3.5.5",
     "jsdoc-export-default-interop":      "^0.3.1",
-    "mocha":                             "^6.0.2",
+    "mocha":                             "^7.1.2",
     "node-sass":                         "^4.11.0",
     "nodemon":                           "^1.18.10",
     "pre-commit":                        "^1.2.2",
